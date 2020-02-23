@@ -8,7 +8,7 @@ namespace Group8_Assignment2_CT_Spring2020
     {
         static void Main(string[] args)
         {
-            /*Console.WriteLine("Question 1");
+            Console.WriteLine("Question 1");
             int[] l1 = new int[] { 5, 6, 6, 9, 9, 12 };
             int target = 9;
             int[] r = TargetRange(l1, target);
@@ -25,7 +25,7 @@ namespace Group8_Assignment2_CT_Spring2020
             Console.WriteLine("Question 3");
             int[] l2 = new int[] { 4, 5, 6, 9 };
             int sum = MinimumSum(l2);
-            Console.WriteLine(sum);*/
+            Console.WriteLine(sum);
 
             Console.WriteLine("Question 4");
             string s2 = "eebhhh";
@@ -59,6 +59,9 @@ namespace Group8_Assignment2_CT_Spring2020
            Console.WriteLine("Question 9");
            SolvePuzzle();*/
         }
+
+        
+        
         public static void DisplayArray(int[] a)
         {
             foreach (int n in a)
@@ -66,78 +69,80 @@ namespace Group8_Assignment2_CT_Spring2020
                 Console.Write(n + " ");
             }
         }
+
+        //Logic : Created a array with default values, checking the given array for target and if target not found, return the 
+        //default array. If the target is not found, continue with next position. Default value will not be updated till the 
+        //target is found.
         public static int[] TargetRange(int[] l1, int t)
         {
-            int[] targetRange = new int[2];
             try
             {
-                //Write your code here;
-                int element = 0;
+                int[] Tr = new int[] { -1, -1 };
                 for (int i = 0; i < l1.Length; i++)
                 {
-
-                    if (t == l1[i])
+                    if (l1[i] != t) 
                     {
-                        targetRange[element] = i;
-                        element += 1;
+                        continue;
                     }
+                    if (Tr[0] == -1) 
+                    Tr[0] = i;
+                    Tr[1] = i;
                 }
-                if (targetRange.Length == 0)
-                {
-                    targetRange = new int[] { -1, 1 };
-                }
+                return Tr;
             }
-
             catch (Exception)
             {
                 throw;
             }
-            return targetRange;
+            return new int[] { };
         }
+
+
+        //Logic: Traversing the string in reverse and checking for spaces. If space found, adding a space to reverse string else 
+        //continue with adding reverse characters to the string. Using to null strings here to update the characters. Once space is 
+        //found, the null string is set to null again, new string is stored in it and appended after the for loop.
+
         public static string StringReverse(string s)
         {
-            string reverse = "";
             try
             {
-                //write your code here
-                int spaces = 0;
-                foreach (char i in s)
-                {
-                    if (i == ' ')
-                    {
-                        spaces += 1;
-                    }
-                }
-                string[] strArray = new string[] { };
+                string word = "";
+                string rev = "";
                 for (int i = s.Length - 1; i >= 0; i--)
                 {
-                    if (!s[i].Equals(" "))
+                    if (s[i] == ' ')
                     {
-                        reverse += s[i];
+                        rev = word + " " + rev;
+                        word = "";
                     }
                     else
                     {
-                        reverse += " ";
+                        word += s[i];
                     }
                 }
+                rev = word + " " + rev;
+                Console.WriteLine(rev);
             }
             catch (Exception)
             {
+
                 throw;
             }
-            return reverse;
+            return null;
         }
+
+        //Logic: Comparing each element of the array for distinct values and if found same, adding by 1 to get the minimum sum
+
         public static int MinimumSum(int[] l2)
         {
             int sum = 0;
             try
             {
-                //Write your code here;
-                for (int i = 0; i < l2.Length - 1; i++)
+                for (int i = 0; i < l2.Length - 1; i++) 
                 {
-                    if (l2[i] == l2[i + 1])
+                    if (l2[i] == l2[i + 1]) 
                     {
-                        l2[i + 1] = l2[i + 1] + 1;
+                        l2[i + 1] = l2[i + 1] + 1; 
                         sum += l2[i];
                     }
                     else
