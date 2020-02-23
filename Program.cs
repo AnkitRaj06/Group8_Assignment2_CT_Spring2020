@@ -47,17 +47,17 @@ namespace Group8_Assignment2_CT_Spring2020
             char[] arr = new char[] { 'a', 'b', 'c', 'a', 'b', 'c' };
             int k = 3;
             Console.WriteLine(ContainsDuplicate(arr, k));
-            /*Console.WriteLine("Question 7");
-            int rodLength = 4;
+            Console.WriteLine("Question 7");
+            int rodLength = 15;
             int priceProduct = GoldRod(rodLength);
             Console.WriteLine(priceProduct);
             Console.WriteLine("Question 8");
             string[] userDict = new string[] { "rocky", "usf", "hello", "apple" };
             string keyword = "hhllo";
-        
             Console.WriteLine(DictSearch(userDict, keyword));
-            Console.WriteLine("Question 8");
-            SolvePuzzle();*/
+            /*
+           Console.WriteLine("Question 9");
+           SolvePuzzle();*/
         }
         public static void DisplayArray(int[] a)
         {
@@ -75,7 +75,7 @@ namespace Group8_Assignment2_CT_Spring2020
                 int element = 0;
                 for (int i = 0; i < l1.Length; i++)
                 {
-                    
+
                     if (t == l1[i])
                     {
                         targetRange[element] = i;
@@ -101,8 +101,9 @@ namespace Group8_Assignment2_CT_Spring2020
             {
                 //write your code here
                 int spaces = 0;
-                foreach(char i in s){
-                    if(i == ' ')
+                foreach (char i in s)
+                {
+                    if (i == ' ')
                     {
                         spaces += 1;
                     }
@@ -110,7 +111,7 @@ namespace Group8_Assignment2_CT_Spring2020
                 string[] strArray = new string[] { };
                 for (int i = s.Length - 1; i >= 0; i--)
                 {
-                    if(!s[i].Equals(" "))
+                    if (!s[i].Equals(" "))
                     {
                         reverse += s[i];
                     }
@@ -132,9 +133,9 @@ namespace Group8_Assignment2_CT_Spring2020
             try
             {
                 //Write your code here;
-                for(int i = 0; i < l2.Length - 1; i++)
+                for (int i = 0; i < l2.Length - 1; i++)
                 {
-                    if(l2[i] == l2[i + 1])
+                    if (l2[i] == l2[i + 1])
                     {
                         l2[i + 1] = l2[i + 1] + 1;
                         sum += l2[i];
@@ -165,7 +166,7 @@ namespace Group8_Assignment2_CT_Spring2020
                 //Write Your Code Here
                 //Dictionary to store the string elements and their counts
                 Dictionary<char, int> dictionary = new Dictionary<char, int>();
-                foreach(char c in s2)
+                foreach (char c in s2)
                 {
                     if (dictionary.ContainsKey(c))
                     {
@@ -178,11 +179,8 @@ namespace Group8_Assignment2_CT_Spring2020
                 }
                 //Sorted the dictionary in descending order
                 dictionary = dictionary.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-
-                //Iterated over each key-value of the sorted list
                 foreach(KeyValuePair<char, int> item in dictionary)
                 {
-                    //Iterated to ensure each key is stored multiple times as per their values
                     for(int i=0; i<item.Value; i++)
                     {
                         freqSorted += item.Key;
@@ -220,7 +218,6 @@ namespace Group8_Assignment2_CT_Spring2020
                 int i = 0;
                 int j = 0;
 
-                //In case any of the arrays is null, returned an ampty integer array
                 if(nums2 is null || nums2 is null)
                 {
                     intersect = new int[] { };
@@ -249,7 +246,7 @@ namespace Group8_Assignment2_CT_Spring2020
                         }
                     }
                 }
-                //Length of the interger array is instantiated as the length of the string
+                
                 intersect = new int[intersectedValues.Length];
 
                 //For loop to store the string values to the integer array
@@ -277,7 +274,7 @@ namespace Group8_Assignment2_CT_Spring2020
                 // Write your code here
                 //Dictionary to store the nums1 elements and their counts
                 Dictionary<int, int> dict = new Dictionary<int, int>();
-                foreach(int i in nums1)
+                foreach (int i in nums1)
                 {
                     if (dict.ContainsKey(i))
                     {
@@ -298,7 +295,7 @@ namespace Group8_Assignment2_CT_Spring2020
                     if (dict.ContainsKey(i))
                     {
                         intersectedValues += i;
-                        if(dict[i] > 1)
+                        if (dict[i] > 1)
                         {
                             dict[i]--;
                         }
@@ -310,8 +307,6 @@ namespace Group8_Assignment2_CT_Spring2020
                 }
                 // Length of the integer array is set as the length of the string
                 intersect = new int[intersectedValues.Length];
-
-                //For loop to store the string values to the integer array
                 for(int i=0; i < intersectedValues.Length; i++)
                 {
                     intersect[i] = int.Parse(intersectedValues[i].ToString());
@@ -334,8 +329,6 @@ namespace Group8_Assignment2_CT_Spring2020
                 //Write your code here;
                 //Dictionary to store a new char value
                 Dictionary<char, int> dict = new Dictionary<char, int>();
-
-                //For loop to iterate over each char element
                 for(int i = 0; i < arr.Length; i++)
                 {
                     //Variables to store the old index value and the difference
@@ -354,8 +347,6 @@ namespace Group8_Assignment2_CT_Spring2020
                     {
                         dict.Add(arr[i], i);
                     }
-
-                    //If the difference is > 0, but <= k, our condition is satisfied
                     if(diff > 0 && diff <= k)
                     {
                         return true;
@@ -365,6 +356,88 @@ namespace Group8_Assignment2_CT_Spring2020
             catch (Exception)
             {
                 throw;
+            }
+            return false;
+        }
+
+        public static int GoldRod(int rodLength)
+        {
+            try
+            {
+                int[] output = new int[rodLength];
+                //Calculating combinations of the length, returning the maximum product
+                return Combinations(1, rodLength, output, 0);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception occured in GoldRod method: ", e);
+            }
+            return 0;
+        }
+
+        static int product = 1;
+        private static int Combinations(int i, int n, int[] a, int index)
+        {
+            if (n == 0)
+            {
+                //Calculate the product of the combination
+                int productnew = FindProduct(a, index);
+                //If product is higher, save it
+                if (productnew > product)
+                    product = productnew;
+            }
+            //Get combinations using recursion
+            for (int j = i; j <= n; j++)
+            {
+                a[index] = j;
+                Combinations(j, n - j, a, index + 1);
+            }
+
+            //Return the highest product
+            return product;
+        }
+        private static int FindProduct(int[] a, int n)
+        {
+            int s = 1;
+            for (int i = 0; i < n; i++)
+                s = s * a[i];
+            return s;
+        }
+        public static bool DictSearch(string[] userDict, string keyword)
+        {
+            try
+            {
+                //Logic: If the length of string in userDict and keyword are the same
+                //Calculate the number of chars that differ in the words
+                //If the number of different chars for the words is 1, return true.
+                foreach (string a in userDict)
+                {
+                    char[] userword = a.ToCharArray();
+                    char[] keywordchars = keyword.ToCharArray();
+                    int count = keyword.ToCharArray().Length;
+                    int diffchars = 0;
+                    if (count == userword.Length)
+                    {
+                        while (count > 0)
+                        {
+                            //Calculating the number of different chars in the word
+                            if (keywordchars[count - 1] != userword[count - 1])
+                            {
+                                diffchars++;
+                            }
+                            count--;
+                        }
+                        //If diffchars is 1, then return true
+                        if (diffchars == 1)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception occured in DictSearch method: ", e);
             }
             return false;
         }
