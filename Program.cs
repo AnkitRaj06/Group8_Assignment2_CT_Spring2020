@@ -12,12 +12,14 @@ namespace Group8_Assignment2_CT_Spring2020
             int[] l1 = new int[] { 5, 6, 6, 9, 9, 12 };
             int target = 9;
             int[] r = TargetRange(l1, target);
-            for(int i = 0; i < r.Length; i++)
+
+            //Code to print range
+            for (int i = 0; i < r.Length; i++)
             {
                 Console.Write(r[i]);
             }
             Console.WriteLine();
-            // Write your code to print range r here
+
             Console.WriteLine("Question 2");
             string s = "University of South Florida";
             string rs = StringReverse(s);
@@ -55,13 +57,10 @@ namespace Group8_Assignment2_CT_Spring2020
             string[] userDict = new string[] { "rocky", "usf", "hello", "apple" };
             string keyword = "hhllo";
             Console.WriteLine(DictSearch(userDict, keyword));
-            /*
-           Console.WriteLine("Question 9");
-           SolvePuzzle();*/
+            Console.WriteLine("Question 9");
+            SolvePuzzle();
         }
 
-        
-        
         public static void DisplayArray(int[] a)
         {
             foreach (int n in a)
@@ -80,21 +79,21 @@ namespace Group8_Assignment2_CT_Spring2020
                 int[] Tr = new int[] { -1, -1 };
                 for (int i = 0; i < l1.Length; i++)
                 {
-                    if (l1[i] != t) 
+                    if (l1[i] != t)
                     {
                         continue;
                     }
-                    if (Tr[0] == -1) 
-                    Tr[0] = i;
+                    if (Tr[0] == -1)
+                        Tr[0] = i;
                     Tr[1] = i;
                 }
                 return Tr;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Console.WriteLine("Error in TargetRange method {0} ", e);
+                return new int[] { -1, -1 };
             }
-            return new int[] { };
         }
 
 
@@ -121,14 +120,13 @@ namespace Group8_Assignment2_CT_Spring2020
                     }
                 }
                 rev = word + " " + rev;
-                Console.WriteLine(rev);
+                return rev;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                Console.WriteLine("Error in StringReverse method {0} ", e);
+                return null;
             }
-            return null;
         }
 
         //Logic: Comparing each element of the array for distinct values and if found same, adding by 1 to get the minimum sum
@@ -138,11 +136,11 @@ namespace Group8_Assignment2_CT_Spring2020
             int sum = 0;
             try
             {
-                for (int i = 0; i < l2.Length - 1; i++) 
+                for (int i = 0; i < l2.Length - 1; i++)
                 {
-                    if (l2[i] == l2[i + 1]) 
+                    if (l2[i] == l2[i + 1])
                     {
-                        l2[i + 1] = l2[i + 1] + 1; 
+                        l2[i + 1] = l2[i + 1] + 1;
                         sum += l2[i];
                     }
                     else
@@ -152,9 +150,9 @@ namespace Group8_Assignment2_CT_Spring2020
                 }
                 sum += l2[l2.Length - 1];
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Console.WriteLine("Error in MinimumSum method {0} ", e);
             }
             return sum;
         }
@@ -184,9 +182,9 @@ namespace Group8_Assignment2_CT_Spring2020
                 }
                 //Sorted the dictionary in descending order
                 dictionary = dictionary.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-                foreach(KeyValuePair<char, int> item in dictionary)
+                foreach (KeyValuePair<char, int> item in dictionary)
                 {
-                    for(int i=0; i<item.Value; i++)
+                    for (int i = 0; i < item.Value; i++)
                     {
                         freqSorted += item.Key;
                     }
@@ -223,7 +221,7 @@ namespace Group8_Assignment2_CT_Spring2020
                 int i = 0;
                 int j = 0;
 
-                if(nums2 is null || nums2 is null)
+                if (nums2 is null || nums2 is null)
                 {
                     intersect = new int[] { };
                 }
@@ -251,7 +249,7 @@ namespace Group8_Assignment2_CT_Spring2020
                         }
                     }
                 }
-                
+
                 intersect = new int[intersectedValues.Length];
 
                 //For loop to store the string values to the integer array
@@ -312,7 +310,7 @@ namespace Group8_Assignment2_CT_Spring2020
                 }
                 // Length of the integer array is set as the length of the string
                 intersect = new int[intersectedValues.Length];
-                for(int i=0; i < intersectedValues.Length; i++)
+                for (int i = 0; i < intersectedValues.Length; i++)
                 {
                     intersect[i] = int.Parse(intersectedValues[i].ToString());
                 }
@@ -328,13 +326,13 @@ namespace Group8_Assignment2_CT_Spring2020
         {
             /* Logic: A dictionary is used to store the char element by iterating over a for loop, 
              and in case it exists in the dictionary, its value is stored in a new variable index 
-             and the difference between both the indices is checked against k */ 
+             and the difference between both the indices is checked against k */
             try
             {
                 //Write your code here;
                 //Dictionary to store a new char value
                 Dictionary<char, int> dict = new Dictionary<char, int>();
-                for(int i = 0; i < arr.Length; i++)
+                for (int i = 0; i < arr.Length; i++)
                 {
                     //Variables to store the old index value and the difference
                     int index = 0;
@@ -352,15 +350,15 @@ namespace Group8_Assignment2_CT_Spring2020
                     {
                         dict.Add(arr[i], i);
                     }
-                    if(diff > 0 && diff <= k)
+                    if (diff > 0 && diff <= k)
                     {
                         return true;
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Console.WriteLine("Error in MinimumSum method {0} ", e);
             }
             return false;
         }
@@ -375,7 +373,7 @@ namespace Group8_Assignment2_CT_Spring2020
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception occured in GoldRod method: ", e);
+                Console.WriteLine("Exception occured in ContainsDuplicate method: ", e);
             }
             return 0;
         }
@@ -383,23 +381,32 @@ namespace Group8_Assignment2_CT_Spring2020
         static int product = 1;
         private static int Combinations(int i, int n, int[] a, int index)
         {
-            if (n == 0)
+            try
             {
-                //Calculate the product of the combination
-                int productnew = FindProduct(a, index);
-                //If product is higher, save it
-                if (productnew > product)
-                    product = productnew;
+                if (n == 0)
+                {
+                    //Calculate the product of the combination
+                    int productnew = FindProduct(a, index);
+                    //If product is higher, save it
+                    if (productnew > product)
+                        product = productnew;
+                }
+                //Get combinations using recursion
+                for (int j = i; j <= n; j++)
+                {
+                    a[index] = j;
+                    Combinations(j, n - j, a, index + 1);
+                }
+
+                //Return the highest product
+                return product;
             }
-            //Get combinations using recursion
-            for (int j = i; j <= n; j++)
+            catch (Exception e)
             {
-                a[index] = j;
-                Combinations(j, n - j, a, index + 1);
+                Console.WriteLine("Exception occured in ContainsDuplicate method: ", e);
+                return 0;
             }
 
-            //Return the highest product
-            return product;
         }
         private static int FindProduct(int[] a, int n)
         {
@@ -442,9 +449,105 @@ namespace Group8_Assignment2_CT_Spring2020
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception occured in DictSearch method: ", e);
+                Console.WriteLine("Exception occured in DictSearch method {0} : ", e);
             }
             return false;
+        }
+
+        public static void SolvePuzzle()
+        {
+            try
+            {
+                //Get inputs from console
+                List<string> data = CollectInputs();
+
+                //Get list of unique characters
+                List<char> uniquechars = GetUniqueChars(data);
+
+                //Get all permuations of numbers of length uniquechars.count
+                List<List<int>> combs = GetPermutations(Enumerable.Range(0, 10).ToList(), uniquechars.Count());
+
+                //Loop through the list of number combinations to find the set which solves the puzzle.
+                for (int j = 0; j < combs.Count(); j++)
+                {
+                    //Assigning the combination of numbers to the chars
+                    Dictionary<char, int> assignedNumbers = new Dictionary<char, int>();
+                    for (int i = 0; i < uniquechars.Count(); i++)
+                    {
+                        assignedNumbers.Add(uniquechars[i], combs[j][i]);
+                    }
+
+                    //If the first digit of the input string char is 0, then continue
+                    if (assignedNumbers[data[0][0]] == 0 || assignedNumbers[data[1][0]] == 0 || assignedNumbers[data[2][0]] == 0)
+                        continue;
+
+                    //Building the number for the inputs
+                    int input1 = BuildNumber(assignedNumbers, data[0]);
+                    int input2 = BuildNumber(assignedNumbers, data[1]);
+                    int output = BuildNumber(assignedNumbers, data[2]);
+
+                    //If this combination solves the puzzle, Print the values
+                    if (input1 + input2 == output)
+                    {
+                        Console.WriteLine("Set of assignments that solve the puzzle are: ");
+                        foreach (var a in assignedNumbers)
+                        {
+                            Console.WriteLine("Value for character: {0} is {1}  ", a.Key, a.Value);
+                        }
+                        return;
+                    }
+                }
+                //If no combination is found
+                Console.WriteLine("No combination of numbers, solve the puzzle.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error in SolvePuzzle method {0} ", e);
+            }
+        }
+
+        //This method builds the number for the string input using the dictionary
+        private static int BuildNumber(Dictionary<char, int> assignedNumbers, string input)
+        {
+            string i1 = "";
+            foreach (char c in input)
+            {
+                i1 += assignedNumbers[c];
+            }
+            return Int32.Parse(i1);
+        }
+
+        //Collect inputs from user
+        private static List<string> CollectInputs()
+        {
+            Console.WriteLine("Enter the two input strings(separated by comma) : ");
+            string input = Console.ReadLine();
+
+            Console.WriteLine("Enter the output string");
+            string output = Console.ReadLine();
+
+            List<string> inputdata = new List<string> { input.Split(",")[0], input.Split(",")[1], output };
+
+            return inputdata;
+        }
+
+        //Get the list of unique chars from the string
+        private static List<char> GetUniqueChars(List<string> data)
+        {
+            string s1 = "";
+            foreach (string s in data)
+                s1 += s;
+            //Getting the unique chars from string
+            return s1.ToCharArray().Distinct().ToList();
+        }
+
+        //Returns the permutations of the list of integers of specific length
+        public static List<List<int>> GetPermutations(List<int> list, int length)
+        {
+            //Get all the permutations of the list with the length
+            if (length == 1)
+                return list.Select(t => new List<int> { t }).ToList();
+            return GetPermutations(list, length - 1).SelectMany(t => list.Where(o => !t.Contains(o)), (t1, t2) => t1.Concat(new List<int> { t2 }).ToList()).ToList();
         }
     }
 }
